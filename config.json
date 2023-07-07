@@ -29,5 +29,5 @@
         }
     },
     "log_path_folder":"logs",
-    "log_name_base": "server_log(v1)"
+    "log_name_base": "server_log"
 }
