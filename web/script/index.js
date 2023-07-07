@@ -107,7 +107,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     this.document.getElementById('main.accessroom.createroom').addEventListener('click', function () {
 
-        const roomname = document.getElementById('main.accessroom.roomname').value;
+        const roomname = document.getElementById('main.accessroom.textdata').value;
 
         create_room(roomname);
 
@@ -115,7 +115,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     this.document.getElementById('main.accessroom.enterroom').addEventListener('click', function () {
 
-        const roomcode = document.getElementById('main.accessroom.roomcode').value;
+        const roomcode = document.getElementById('main.accessroom.textdata').value;
 
         enter_room(roomcode);
 
