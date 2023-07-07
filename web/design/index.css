@@ -1,21 +1,6 @@
 .bgimg {
-    /* background-image: url('/design/index_background.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 90vh; */
-
     width: 98%;
-	/*
-	background-color: green;
-	background-image: url("back.png");
-	background-repeat: no-repeat; 
-	background-position: center;
-	background-attachment: fixed; 
-	*/
-
-	/* 위와동일 */
 	background: white url('/design/index_background.webp') no-repeat center fixed;
-
 	-webkit-background-size : cover;
 	-moz-background-size : cover;
 	-o-background-size: cover;

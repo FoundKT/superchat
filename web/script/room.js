@@ -321,13 +321,13 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 if (index == 0) {
 
-                    p.textContent = `ㅤ${data.author ? `${data.author}: ` : ''}${data.texts[index]}`;
+                    p.textContent = `${data.author ? `${data.author}: ` : ''}${data.texts[index]}`;
 
                     div.appendChild(p);
 
                 } else {
 
-                    p.textContent = `ㅤ${data.texts[index]}`;
+                    p.textContent = `${data.texts[index]}`;
 
                     div.appendChild(p);
 
@@ -341,7 +341,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             const p = document.createElement('p');
             p.classList.add('chat_textp');
-            p.textContent = `ㅤ${data.author ? `${data.author}: ` : ''}${data.text}`;
+            p.textContent = `${data.author ? `${data.author}: ` : ''}${data.text}`;
 
             div.appendChild(p);
 
@@ -455,7 +455,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     };
 
-    config.html['title_roomname'].innerText = `Welcome to chat "${decodeURIComponent(config['last_room_name'])}" !\nInvite Code: ${config['last_room_code']}`
+    config.html['title_roomname'].innerText = `Welcome to chat "${decodeURIComponent(config['last_room_name'])}" !`;
 
     const socket = new WebSocket(`ws://${config['socket_info'].host}:${config['socket_info'].port}`);
     socket.binaryType = "arraybuffer";

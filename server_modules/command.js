@@ -46,6 +46,7 @@ exports.processCommandMSG = function (content) {
                     `${prefix}cls - Clear chat list`,
                     `${prefix}ccu - Check concurrent users`,
                     `${prefix}mn - Check my nickname`,
+                    `${prefix}invite - Check room invite code`,
                     `*${prefix}kick <nick> - Kick user`
                     ];
 
@@ -62,6 +63,10 @@ exports.processCommandMSG = function (content) {
             } else if (text == `${prefix}mn`) {
 
                 dataform.text = `Your nickname is '${sender.nickname}'`;
+
+            } else if (text == `${prefix}invite`) {
+
+                dataform.text = `Invite code is '${sender.roomcode}'`;
 
             } else if (text.startsWith(`${prefix}kick`)) {
 
