@@ -1,0 +1,50 @@
+// 이미 완성: #
+// 제작 중: $
+// 제작 예정: @
+
+
+# express js 서버 구축
+#  > 기본적인 보안 설계
+
+# html/css/ejs 기본 틀
+#  > 기본적인 채팅 디자인
+
+# 라우팅을 이용한 get.post api / 사이트접속 설계
+#  방생성
+#  클라에서 필요한 서버기본콘픽 요청
+#  /room/룸코드 를 이용한 접속 설계 (라우팅으로 :roomcode 와 같이 params 전달)
+
+# WebSocket 을 이용한 소켓 연결 구성
+
+# 기본적인 api 요청 회수 제한
+
+# 사용이 가장 많이 되는 코드들을 kit 파일로 모듈화
+#  로깅, 쿠키설정, 웹경로, 접속자아이피접근, api요청회수제한
+
+# Crypto Encrypt/Decrypt 모듈화
+#  Algorithm -> aes 256 cbc
+#  iv, salt, key를 이용한 En/Decrypt
+#  기본 key는 config 파일에 저장
+#    > 서버에서 클라로 보낼 때 사용하는 키는 항상 동일
+
+# ws 통신 보안 설계
+#  packet 파일로 모듈화 (construct, deconstruct)
+#  기본 패킷 종류 -> ArrayBuffer
+#  기본 패킷 양식 -> Header, Body
+#  Header -> packetId, packetStatus, dataMethod, data(body)Info
+#  Body -> Buffer로 된 데이터
+#    > 데이터를 Bson으로 buffer화
+#      > 모듈화한 Crypto 를 이용한 암호화
+#  빌드 된 데이터를 카톡에서 이용하는 방식으로 빌드
+
+# 라우팅, 모듈화 된 파일들을 폴더로 정리
+#  server_modules
+#  server_routes
+
+# 로깅 시스템
+#   > 로깅함수를 호출하면 기본 양식에 따라 콘솔에 출력 후 저장할 데이터 목록에 추가
+#   > 로그 저장 함수가 호출 되면 바로 저장
+#   > .superlog 확장자로 저장 후 .gitignore를 통해 fetch 할 때 업로드가 안되게 변경
+#   > 프로세스가 종료되는 모든 이벤트를 감지 후 로그 저장 함수 호출
+
+@ 봇 연결 방지
