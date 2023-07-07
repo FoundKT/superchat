@@ -26,8 +26,42 @@
         "303": {
             "ko": "해당 방에서 강제 퇴장 당하셨습니다!",
             "en": "You got kicked on curren't room!"
+        },
+        "444": {
+            "ko": "비정상적인 접근이 감지됐습니다!",
+            "en": "Abnormal access has been detected!"
         }
     },
-    "log_path_folder":"logs",
-    "log_name_base": "server_log"
+    "log_path_folder": "logs",
+    "log_name_base": "server_log",
+    "ua_db_bot": [
+        "bot",
+        "spider",
+        "crawl",
+        "APIs-Google",
+        "AdsBot",
+        "Googlebot",
+        "mediapartners",
+        "Google Favicon",
+        "FeedFetcher",
+        "Google-Read-Aloud",
+        "DuplexWeb-Google",
+        "googleweblight",
+        "bing",
+        "yandex",
+        "baidu",
+        "duckduck",
+        "yahoo",
+        "ecosia",
+        "ia_archiver",
+        "facebook",
+        "instagram",
+        "pinterest",
+        "reddit",
+        "slack",
+        "twitter",
+        "whatsapp",
+        "youtube",
+        "semrush"
+    ]
 }

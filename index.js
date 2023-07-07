@@ -7,7 +7,7 @@ const requestIp = require("request-ip");
 const cookieParser = require("cookie-parser");
 
 const { ChatForServer } = require("./server_modules/chat");
-const { getDefaultPath, log, saveLog } = require("./server_modules/kit");
+const { getDefaultPath, log, saveLog, detectBot } = require("./server_modules/kit");
 const config = require("./config.json");
 
 const chat = new ChatForServer();
@@ -38,10 +38,11 @@ app.all('*', async function (req, res) {
         const user = {
             ip: requestIp.getClientIp(req),
             host: req.headers.host,
-            origin: req.originalUrl
+            origin: req.originalUrl,
+            ua: req.headers['user-agent']
         };
     
-        log(`{p}Error detected!\n{c}ip : ${user.ip}\n{c}host : ${user.host}${user.origin}`);
+        log(`{p}Error detected!\n{c}ip : ${user.ip}\n{c}host : ${user.host}${user.origin}\n{c}user-agent : ${user.ua}`);
     
         res.redirect('/error?code=404');
 
@@ -60,10 +61,17 @@ router.use(function (req, res, next) {
         const user = {
             ip: requestIp.getClientIp(req),
             host: req.headers.host,
-            origin: req.originalUrl
+            origin: req.originalUrl,
+            ua: req.headers['user-agent']
         };
     
-        log(`{p}Web access detected!\n{c}ip : ${user.ip}\n{c}host : ${user.host}${user.origin}`);
+        log(`{p}Web access detected!\n{c}ip : ${user.ip}\n{c}host : ${user.host}${user.origin}\n{c}user-agent : ${user.ua}`);
+
+        if (detectBot(user.ua)) {
+
+            return res.redirect('/error?code=444');
+
+        };
 
     } catch (e) {
 

@@ -58,12 +58,19 @@ function getIp(req) {
 
 };
 
+function detectBot(ua) {
+
+    return (new RegExp(config['ua_db_bot'].join("|"),"i")).test(ua);
+
+};
+
 exports.setRoomCookie = setRoomCookie;
 exports.getDefaultPath = getDefaultPath;
 exports.accessWebFile = accessWebFile;
 exports.log = log;
 exports.saveLog = saveLog;
 exports.getIp = getIp;
+exports.detectBot = detectBot;
 
 exports.antiDDos = rateLimit({
 	windowMs: 1 * 60 * 1000,
