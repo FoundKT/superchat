@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+    <meta charset="utf-8">
+
+    <script src="/script/__nodemodules.js"></script>
+    <script src="/script/room.js"></script>
+    
+    <link href="/design/room.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <title>MultiChat</title>
+
+</html>
+
+<body>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        function chatListScrollDown() {
+            let chat = document.getElementById('main.showchat.chatlist');
+            chat.scrollTop = chat.scrollHeight;
+        };
+    </script>
+
+    <h1 id="main.room.roomname">
+        Messenger
+    </h1>
+
+    <div class="middle">
+
+        <div id="main.showchat.chatbox" class="chat_boxdiv">
+
+            <div id="main.showchat.chatbox.header" class="chat_boxheader">
+
+                <!-- <span class="chat_boxtoggle"><i class="material-icons">close</i></span> -->
+
+            </div>
+
+            <div id="main.showchat.chatbox.body" class="chat_boxbody">
+
+                <div id="main.showchat.chatlist" class="chat_logs">
+        
+                </div>
+
+            </div>
+
+            <div id="main.showchat.chatbox.input" class="chat_input">
+
+                <input size="60" type="text" id="main.accesschat.text" class="chat_input_textbox" placeholder="Send a message..."/>
+                    
+                <button class="chat_submit material-symbols-outlined" id="main.accesschat.send">Send</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>

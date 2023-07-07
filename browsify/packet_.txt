@@ -1,0 +1,10 @@
+<00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 + int(bodyLength)>
+ ^1        ^ ^2  ^ ^3                             ^ ^4^^5        ^   ^ex           ^
+
+
+[1]: packet Id (1 ~ 99999)
+[2]: status (def: 0)
+[3]: packet method
+[4]: body offset (?)
+[5]: bodyLength
+[ex]: body buffer

@@ -1,0 +1,195 @@
+
+
+--------------------------------
+[1688643880859] [Thu Jul 06 2023 20:44:40 GMT+0900 (대한민국 표준시)] [Num.1]
+
+ [+] Express server started!
+   - port : 1231
+
+--------------------------------
+
+--------------------------------
+[1688643880862] [Thu Jul 06 2023 20:44:40 GMT+0900 (대한민국 표준시)] [Num.2]
+
+ [+] WebSocket listening!
+   - config : {"port":5867}
+
+--------------------------------
+
+--------------------------------
+[1688643884010] [Thu Jul 06 2023 20:44:44 GMT+0900 (대한민국 표준시)] [Num.3]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/error?code=303
+
+--------------------------------
+
+--------------------------------
+[1688643884078] [Thu Jul 06 2023 20:44:44 GMT+0900 (대한민국 표준시)] [Num.4]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/config/errordb?code=303
+
+--------------------------------
+
+--------------------------------
+[1688643885363] [Thu Jul 06 2023 20:44:45 GMT+0900 (대한민국 표준시)] [Num.5]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/
+
+--------------------------------
+
+--------------------------------
+[1688643888216] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.6]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/api/accessroom/createroom
+
+--------------------------------
+
+--------------------------------
+[1688643888220] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.7]
+
+ [+] Create room requested!
+   - roomname : ㅆㅁㄶㅁㄴㅇ호
+   - roomcode : lF67FDkA
+   - sessionkey : gdF2YC27bWlUkVpswJ19TjmjSal4hWzw81BH08BN+idW6SSCY1GKu+MmedxVDUWBniSRxviJkwCAH24Ctq/YR5I4zxyTcTEapV/t0726xueYgisIfr1a45KzqZYDdo/Kk4Zcdga1BF+T0qPZWFtRIo8we1a675qrsN2YziKBXrHVsw==
+
+--------------------------------
+
+--------------------------------
+[1688643888284] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.8]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/room/accessroom/makeroom
+
+--------------------------------
+
+--------------------------------
+[1688643888285] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.9]
+
+ [+] Create room requested!
+   - roomcode : lF67FDkA
+
+--------------------------------
+
+--------------------------------
+[1688643888298] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.10]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/room/lF67FDkA
+
+--------------------------------
+
+--------------------------------
+[1688643888406] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.11]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/config/socketaddress
+
+--------------------------------
+
+--------------------------------
+[1688643888452] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.12]
+
+ [+] Web access detected!
+   - ip : ::ffff:192.168.1.254
+   - host : telegram_targeted.mcv.kr:1231/config/packetalgorithm
+
+--------------------------------
+
+--------------------------------
+[1688643888473] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.13]
+
+ [+] Socket access detected!
+   - ip : ::ffff:192.168.1.254
+
+--------------------------------
+
+--------------------------------
+[1688643888561] [Thu Jul 06 2023 20:44:48 GMT+0900 (대한민국 표준시)] [Num.14]
+
+ [+] Socket data detected!
+   - ip : ::ffff:192.168.1.254
+   - data : {
+  "header": {
+    "packetId": 1,
+    "status": 0,
+    "method": "CLIENTINFO",
+    "bodyInfo": {
+      "bodyOffer": 0,
+      "bodyLength": 855769088
+    }
+  },
+  "body": {
+    "method": "CLIENTINFO",
+    "data": {
+      "roomcode": "lF67FDkA"
+    },
+    "status": 0
+  }
+}
+
+--------------------------------
+
+--------------------------------
+[1688643891107] [Thu Jul 06 2023 20:44:51 GMT+0900 (대한민국 표준시)] [Num.15]
+
+ [+] Socket data detected!
+   - ip : ::ffff:192.168.1.254
+   - data : {
+  "header": {
+    "packetId": 2,
+    "status": 0,
+    "method": "MSG",
+    "bodyInfo": {
+      "bodyOffer": 0,
+      "bodyLength": 922877952
+    }
+  },
+  "body": {
+    "method": "MSG",
+    "data": {
+      "type": "TEXT",
+      "text": "테스트"
+    },
+    "status": 0
+  }
+}
+
+--------------------------------
+
+--------------------------------
+[1688643892765] [Thu Jul 06 2023 20:44:52 GMT+0900 (대한민국 표준시)] [Num.16]
+
+ [+] Socket data detected!
+   - ip : ::ffff:192.168.1.254
+   - data : {
+  "header": {
+    "packetId": 3,
+    "status": 0,
+    "method": "MSG",
+    "bodyInfo": {
+      "bodyOffer": 0,
+      "bodyLength": 922877952
+    }
+  },
+  "body": {
+    "method": "MSG",
+    "data": {
+      "type": "TEXT",
+      "text": "아아아"
+    },
+    "status": 0
+  }
+}
+
+--------------------------------
