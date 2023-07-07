@@ -9,7 +9,7 @@ class superlog {
         this.loggerVersionText = 'v1';
 
         this.time_started = `${Date.now()}`;
-        this.file_name = `${config['log_name_base']}_${this.loggerVersionText}_${this.time_started}.txt`;
+        this.file_name = `${config['log_name_base']}_${this.loggerVersionText}_${this.time_started}.superlog`;
         this.save_data = '';
         this.log_id = 0;
 
