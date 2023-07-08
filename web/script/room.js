@@ -441,7 +441,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             // console.log('Socket disconnected');
 
-            window.location.href = `/error?code=303`;
+            // window.location.href = `/error?code=303`;
 
         };
 

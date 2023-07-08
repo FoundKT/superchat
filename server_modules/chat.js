@@ -232,17 +232,17 @@ class ChatForServer {
 
             log(`{p}Socket disconnected!\n{c}ip : ${vuser.ip}`);
 
-            this.operation['raw_clients_map'].delete(ws);
+            // this.operation['raw_clients_map'].delete(ws);
 
-            this.operation['rooms'][vuser.roomcode].clients.delete(vuser);
+            // this.operation['rooms'][vuser.roomcode].clients.delete(vuser);
 
-            if (this.operation['rooms'][vuser.roomcode].clients.size == 0) {
+            // if (this.operation['rooms'][vuser.roomcode].clients.size == 0) {
 
-                log(`{p}Chat closed!\n{c}roomcode : ${vuser.roomcode}`);
+            //     log(`{p}Chat closed!\n{c}roomcode : ${vuser.roomcode}`);
 
-                return this.operation['rooms'][vuser.roomcode].activate = false;
+            //     return this.operation['rooms'][vuser.roomcode].activate = false;
 
-            };
+            // };
 
             this.wsTableSendDatas(vuser.roomcode, {
                 method: 'MSG',
