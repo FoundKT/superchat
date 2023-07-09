@@ -15,6 +15,12 @@ router.get('/error', async (req, res) => {
     
 });
 
+router.get('/public', async (req, res) => {
+    
+    res.send(await accessWebFile('html', 'public.html'));
+    
+});
+
 router.post('/media', antiDDos, async (req, res) => {
 
     console.log(req.body);

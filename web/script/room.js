@@ -1,3 +1,49 @@
+function toParams(beforeparam) {
+
+    return new URLSearchParams(beforeparam).toString();
+
+};
+
+async function request(config) {
+
+    if (!config['method'] || !config['url']) {
+
+        return { success: -1, result: 'method or url isn\'t detected!' }
+
+    };
+
+    let fetchUrl = config['url'];
+
+    const fetchconfig = {
+        method: config['method']
+    };
+
+    if (config['header'] || config['headers']) {
+
+        fetchconfig['headers'] = config['header'] ? config['header'] : config['headers'];
+
+    };
+
+    if (config['body'] || config['data']) {
+
+        if (config['method'].toUpperCase() == 'GET' || config['method'].toUpperCase() == 'HEAD') {
+
+            fetchUrl = `${fetchUrl}?${toParams(config['body'] ? config['body'] : config['data'])}`;
+
+        } else {
+
+            fetchconfig['body'] = config['body'] ? config['body'] : config['data'];
+
+            fetchconfig['body'] = JSON.stringify(fetchconfig['body']);
+
+        };
+
+    };
+
+    return (await fetch(fetchUrl, fetchconfig)).json();
+
+};
+
 class packetConstruct {
 
     constructor(config) {
@@ -209,47 +255,30 @@ class newCipher {
 
 };
 
+// class GetCommand {
+
+//     constructor (config, sendpacket) {
+
+//         this.config = config;
+//         this.sendpacket = sendpacket;
+
+//     };
+
+//     getCommandTexts(text) {
+
+//         this.sendpacket(this.config['socket'], {
+//             method: 'GETROOMS',
+//             data: {
+//                 public: true
+//             },
+//             status: 0
+//         });
+
+//     };
+
+// };
+
 window.addEventListener('DOMContentLoaded', async function () {
-
-    async function request(config) {
-
-        if (!config['method'] || !config['url']) {
-
-            return { success: -1, result: 'method or url isn\'t detected!' }
-
-        };
-
-        let fetchUrl = config['url'];
-
-        const fetchconfig = {
-            method: config['method']
-        };
-
-        if (config['header'] || config['headers']) {
-
-            fetchconfig['headers'] = config['header'] ? config['header'] : config['headers'];
-
-        };
-
-        if (config['body'] || config['data']) {
-
-            if (config['method'].toUpperCase() == 'GET' || config['method'].toUpperCase() == 'HEAD') {
-
-                fetchUrl = `${fetchUrl}?${toParams(config['data'])}`;
-
-            } else {
-
-                fetchconfig['body'] = config['body'] ? config['body'] : config['data'];
-
-                fetchconfig['body'] = JSON.stringify(fetchconfig['body']);
-
-            };
-
-        };
-
-        return (await fetch(fetchUrl, fetchconfig)).json();
-
-    };
 
     function getCookie(key) {
 
@@ -285,7 +314,8 @@ window.addEventListener('DOMContentLoaded', async function () {
             title_roomname: this.document.getElementById('main.room.roomname'),
             textbox_typechat: this.document.getElementById('main.accesschat.text'),
             button_sendchat: this.document.getElementById('main.accesschat.send'),
-            list_chatlist: this.document.getElementById('main.showchat.chatlist')
+            list_chatlist: this.document.getElementById('main.showchat.chatlist'),
+            body_chatlistbody: this.document.getElementById('main.showchat.chatbox.body')
         },
         socket_info: (await request({ method: 'get', url: '/config/socketaddress' }))['result'],
         user: {
@@ -353,14 +383,16 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     };
 
-    function socketAddEvent(socket) {
+    function socketAddEvent() {
 
-        socket.onopen = () => {
+        config['socket'].onopen = () => {
 
-            socketSendData(socket, {
+            socketSendData(config['socket'], {
                 method: 'CLIENTINFO',
                 data: {
-                    roomcode: config['last_room_code']
+                    roomcode: config['last_room_code'],
+                    sessionkey: config['last_session_key'],
+                    roomname: config['last_room_name']
                 },
                 status: 0
             });
@@ -377,7 +409,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
         };
 
-        socket.onmessage = (event) => {
+        config['socket'].onmessage = (event) => {
 
             const packet_data = packetCipher.decryptKakao(event.data);
             const packetHeader = packet_data.header;
@@ -387,13 +419,9 @@ window.addEventListener('DOMContentLoaded', async function () {
 
             if (packetBody.method == 'ERROR') {
 
-                if (packetBody.data.type == 'ERROR') {
+                alert(`${packetBody.data.type}\n${packetBody.data.error}`);
 
-                    alert(packetBody.data.error);
-
-                    window.location.href = `/error?code=302`;
-
-                };
+                window.location.href = `/error?code=${packetBody.data.code}`;
 
             } else if (packetBody.method == 'USERINFO') {
 
@@ -437,11 +465,11 @@ window.addEventListener('DOMContentLoaded', async function () {
 
         };
 
-        socket.onclose = () => {
+        config['socket'].onclose = () => {
 
             // console.log('Socket disconnected');
 
-            // window.location.href = `/error?code=303`;
+            window.location.href = `/error?code=300`;
 
         };
 
@@ -460,7 +488,9 @@ window.addEventListener('DOMContentLoaded', async function () {
     const socket = new WebSocket(`ws://${config['socket_info'].host}:${config['socket_info'].port}`);
     socket.binaryType = "arraybuffer";
 
-    socketAddEvent(socket);
+    config['socket'] = socket;
+
+    socketAddEvent();
 
     config.html['button_sendchat'].addEventListener('click', function () {
 

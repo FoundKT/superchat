@@ -47,7 +47,8 @@ exports.processCommandMSG = function (content) {
                     `${prefix}ccu - Check concurrent users`,
                     `${prefix}mn - Check my nickname`,
                     `${prefix}invite - Check room invite code`,
-                    `*${prefix}kick <nick> - Kick user`
+                    `*${prefix}kick <nick> - Kick user`,
+                    `*${prefix}public - Turn room to public`
                     ];
 
             } else if (text == `${prefix}cls`) {
@@ -96,6 +97,18 @@ exports.processCommandMSG = function (content) {
                     dataform.text = `Please use on correct form! '${prefix}kick <nick>'`;
 
                 };
+
+            } else if (text.startsWith(`${prefix}public`)) {
+
+                return resolve({
+                    cmd: {
+                        type: 'runfunction',
+                        funcode: 'room.accesspermission.roommanage.publicmode',
+                        content: {
+                            roomcode: sender.roomcode
+                        }
+                    }
+                });
 
             } else {
 

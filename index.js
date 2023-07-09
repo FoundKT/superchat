@@ -7,10 +7,27 @@ const requestIp = require("request-ip");
 const cookieParser = require("cookie-parser");
 
 const { ChatForServer } = require("./server_modules/chat");
+const { ApiRoom } = require("./server_routes/room");
 const { getDefaultPath, log, saveLog, detectBot } = require("./server_modules/kit");
 const config = require("./config.json");
 
+const apiRoom = new ApiRoom();
 const chat = new ChatForServer();
+
+function middleware(torun, data) {
+
+    if (torun == 'add_public_room_to_api') {
+
+        apiRoom.db['publicRooms'].delete(data);
+
+    };
+
+    apiRoom.db['publicRooms'].add(data);
+
+};
+
+chat.setMiddelWare(middleware);
+
 const app = express();
 const router = express.Router();
 
@@ -27,7 +44,7 @@ app.use(router);
 app.use(cookieParser(config.master_key));
 
 app.use('/', require('./server_routes/index'));
-app.use('/room', require('./server_routes/room'));
+app.use('/room', apiRoom.router);
 app.use('/api', require('./server_routes/api'));
 app.use('/config', require('./server_routes/config'));
 

@@ -21,8 +21,11 @@
 
     <script>
         function chatListScrollDown() {
-            let chat = document.getElementById('main.showchat.chatlist');
+            let chat = document.getElementById('main.showchat.chatbox.body');
             chat.scrollTop = chat.scrollHeight;
+
+            let chat2 = document.getElementById('main.showchat.chatlist');
+            chat2.scrollTop = chat2.scrollHeight;
         };
     </script>
 

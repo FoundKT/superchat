@@ -14,9 +14,17 @@ class ChatForServer {
 
         this.operation = {
             raw_clients_map: new Map(),
-            rooms: {}
+            rooms: {},
+            publicRooms: new Set(),
+            allowed_keys: new Set()
         };
 
+    };
+
+    setMiddelWare(middelware) {
+      
+        this.middelware = middelware;
+        
     };
 
     createSessionKey(hostinfo) {
@@ -45,7 +53,16 @@ class ChatForServer {
 
                 if (infos[0].nickname == kickInfo.nickname) {
 
-                    infos[1].close();
+                    // infos[1].close();
+
+                    this.wsSendData(infos[1], {
+                        method: 'ERROR',
+                        data: {
+                            type: 'USERKICKED',
+                            error: 'You\'re kicked by host!',
+                            code: '303'
+                        }
+                    });
 
                     return this.wsSendData(ws, {
                         method: 'MSG',
@@ -64,6 +81,54 @@ class ChatForServer {
                 data: {
                     type: 'COMMANDTEXT',
                     text: `Victim's nickname is incorrect!`
+                }
+            });
+
+        } else {
+
+            this.wsSendData(ws, {
+                method: 'MSG',
+                data: {
+                    type: 'COMMANDTEXT',
+                    text: `You're not the host!`
+                }
+            });
+
+        };
+
+    };
+
+    mode_Public(roomInfo) {
+
+        const room = this.operation['rooms'][roomInfo.roomcode];
+
+        room.public = true;
+
+        if (!this.operation['publicRooms'].has(room)) {
+
+            this.operation['publicRooms'].delete(room);
+
+        };
+
+        this.operation['publicRooms'].add(room);
+
+        this.middelware('add_public_room_to_api', room);
+
+    };
+
+    mode_Public_msg(ws, roomInfo) {
+
+        const room = this.operation['rooms'][roomInfo.roomcode];
+
+        if (room.host_client == ws) {
+
+            this.mode_Public(roomInfo);
+
+            this.wsSendData(ws, {
+                method: 'MSG',
+                data: {
+                    type: 'COMMANDTEXT',
+                    text: `Your room turned on to public!`
                 }
             });
 
@@ -135,8 +200,9 @@ class ChatForServer {
                 return this.wsSendData(ws, {
                     method: 'ERROR',
                     data: {
-                        type: 'ERROR',
-                        error: 'Packet is contructed by wrong method!'
+                        type: 'BADPACKET',
+                        error: 'Packet is contructed by wrong method!',
+                        code: '302'
                     }
                 });
 
@@ -145,8 +211,14 @@ class ChatForServer {
             if (packetBody.method == 'CLIENTINFO') {
 
                 const roomcode = packetBody.data.roomcode;
+                const sessionkey = packetBody.data.sessionkey;
+                const roomname = packetBody.data.roomname;
 
                 vuser.setGlobalKey('roomcode', roomcode);
+                vuser.setGlobalKey('sessionkey', sessionkey);
+                vuser.setGlobalKey('roomname', roomname);
+
+                this.operation['allowed_keys'].add(sessionkey);
 
                 if (!this.operation['rooms'][roomcode]) {
 
@@ -155,7 +227,10 @@ class ChatForServer {
                         host_client: ws,
                         clients: new Map(),
                         user_count: 0,
-                        activate: true
+                        activate: true,
+                        room_name: roomname,
+                        room_code: roomcode,
+                        public: false
                     };
 
                 };
@@ -177,6 +252,8 @@ class ChatForServer {
                         text: `You can check commands by message '${config['prefix']}help'`
                     }
                 });
+
+            } else if (packetBody.method == 'GETROOMS') {
 
             } else if (packetBody.method == 'MSG') {
 
@@ -232,9 +309,14 @@ class ChatForServer {
 
             log(`{p}Socket disconnected!\n{c}ip : ${vuser.ip}`);
 
-            // this.operation['raw_clients_map'].delete(ws);
+            const room = this.operation['rooms'][vuser.roomcode];
 
-            // this.operation['rooms'][vuser.roomcode].clients.delete(vuser);
+            this.operation['allowed_keys'].delete(vuser.sessionkey);
+            // this.operation['publicRooms'].delete(this.operation['rooms'][vuser.roomcode]);
+
+            this.operation['raw_clients_map'].delete(ws);
+
+            room.clients.delete(vuser);
 
             // if (this.operation['rooms'][vuser.roomcode].clients.size == 0) {
 
@@ -248,9 +330,15 @@ class ChatForServer {
                 method: 'MSG',
                 data: {
                     type: 'INFOTEXT',
-                    text: `[-] ${vuser.nickname} | User Count:${--this.operation['rooms'][vuser.roomcode].user_count}`
+                    text: `[-] ${vuser.nickname} | User Count:${--room.user_count}`
                 }
             }, { withoutSender: false });
+
+            if (room.public) {
+
+
+
+            };
 
         });
 
@@ -261,6 +349,10 @@ class ChatForServer {
         if (funcode == 'room.accesspermission.usermanage.kickuser') {
 
             this.kickUser(ws, content);
+
+        } else if (funcode == 'room.accesspermission.roommanage.publicmode') {
+
+            this.mode_Public_msg(ws, content);
 
         };
 

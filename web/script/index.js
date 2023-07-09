@@ -1,44 +1,50 @@
-window.addEventListener('DOMContentLoaded', async function () {
+function toParams(beforeparam) {
 
-    async function request(config) {
+    return new URLSearchParams(beforeparam).toString();
 
-        if (!config['method'] || !config['url']) {
-    
-            return { success: -1, result: 'method or url isn\'t detected!' }
-    
-        };
+};
 
-        let fetchUrl = config['url'];
-    
-        const fetchconfig = {
-            method: config['method']
-        };
-    
-        if (config['header'] || config['headers']) {
-    
-            fetchconfig['headers'] = config['header'] ? config['header'] : config['headers'];
-    
-        };
-    
-        if (config['body'] || config['data']) {
-    
-            if (config['method'].toUpperCase() == 'GET' || config['method'].toUpperCase() == 'HEAD') {
+async function request(config) {
 
-                fetchUrl = `${fetchUrl}?${toParams(config['data'])}`;
+    if (!config['method'] || !config['url']) {
 
-            } else {
+        return { success: -1, result: 'method or url isn\'t detected!' }
 
-                fetchconfig['body'] = config['body'] ? config['body'] : config['data'];
-
-                fetchconfig['body'] = JSON.stringify(fetchconfig['body']);
-
-            };
-    
-        };
-    
-        return (await fetch(fetchUrl, fetchconfig)).json();
-    
     };
+
+    let fetchUrl = config['url'];
+
+    const fetchconfig = {
+        method: config['method']
+    };
+
+    if (config['header'] || config['headers']) {
+
+        fetchconfig['headers'] = config['header'] ? config['header'] : config['headers'];
+
+    };
+
+    if (config['body'] || config['data']) {
+
+        if (config['method'].toUpperCase() == 'GET' || config['method'].toUpperCase() == 'HEAD') {
+
+            fetchUrl = `${fetchUrl}?${toParams(config['body'] ? config['body'] : config['data'])}`;
+
+        } else {
+
+            fetchconfig['body'] = config['body'] ? config['body'] : config['data'];
+
+            fetchconfig['body'] = JSON.stringify(fetchconfig['body']);
+
+        };
+
+    };
+
+    return (await fetch(fetchUrl, fetchconfig)).json();
+
+};
+
+window.addEventListener('DOMContentLoaded', async function () {
 
     async function create_room(roomname) {
 
@@ -118,6 +124,15 @@ window.addEventListener('DOMContentLoaded', async function () {
         const roomcode = document.getElementById('main.accessroom.textdata').value;
 
         enter_room(roomcode);
+
+    });
+
+    this.document.getElementById('gotopublic').addEventListener('click', function () {
+
+        // document.getElementById('page.titlescreen').classList.toggle('hided');
+        // document.getElementById('page.middlescreen').classList.toggle('hided');
+
+        window.location.href = `/public`;
 
     });
 

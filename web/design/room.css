@@ -47,13 +47,16 @@
 
 .chat_boxbody {
     content: "";
-    /* opacity: 0.1; */
     top: 0;
     left: 0;
-    /* bottom: 0; */
-    /* z-index: -1; */
-    /* padding-bottom: 20px; */
     height: 93%;
+    overflow-y:scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chat_boxbody::-webkit-scrollbar {
+    display: none;
 }
 
 .chat_boxbottom {
@@ -62,6 +65,7 @@
     /* height: 30px; */
     padding-top: 13px;
     padding-left: 15px;
+    padding-bottom: 10px;
     border: none;
     resize: none;
     outline: none;
@@ -91,7 +95,7 @@
     padding: 0.1px;
     max-width: 80%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     padding-left: 10px;
     padding-right: 10px;
     overflow: hidden;
@@ -170,7 +174,7 @@
 .chat_logs {
     padding: 15px;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y:scroll;
 }
 
 .chat_logs::-webkit-scrollbar-track {

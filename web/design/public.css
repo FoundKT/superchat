@@ -25,13 +25,7 @@
     height: 0vh;
 }
 
-.middlebuttons {
-    display: flex;
-    flex: 2px;
-    justify-content: center;
-}
-
-.bluebutton {
+.blueminibutton {
     /* position: absolute; */
 
     display: flex;
@@ -47,7 +41,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 400;
 
-    border-radius: 0rem;
+    border-radius: 2px 2px / 2px 2px;
 
     direction: var(--site-language-direction);
 
@@ -57,11 +51,13 @@
     background-color: rgb(27, 62, 242);
     color: rgb(255, 255, 255);
 
-    width: 120px;
-    height: 60px;
+    /* width: 30px;
+    height: 20px; */
+
+    border-radius: 10%;
 }
 
-.bluebutton:hover {
+.blueminibutton:hover {
     /* width: 125px;
     height: 65px; */
     background-color: rgb(65, 94, 242);
@@ -109,12 +105,67 @@
     display: none;
 }
 
-.titlescreen.hided {
-    opacity: 0%;
-    transition: opacity 0.5s ease;
+
+
+
+
+
+
+
+.publicTable {
+    border: 2px solid #396eff94;
+    border-radius: 5px 5px / 5px 5px;
+    width: 500px;
 }
 
-.middlescreen.hided {
-    opacity: 0%;
-    transition: opacity 0.5s ease;
+.prettyTable {
+    width:  100%;
+    table-layout: fixed;
+}
+
+tr {
+    border-top: 1px solid #C1C3D1;
+    border-bottom: 1px solid #C1C3D1;
+    color: #666B85;
+    font-size: 16px;
+    font-weight: normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:first-child {
+    border-top: none;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 3px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 3px;
+}
+
+td {
+    border-radius: 5px 5px / 5px 5px;
+
+    color: rgba(0, 0, 0, 0.726);
+    
+    /* background: #FFFFFF; */
+    background-color: #ffffff00;
+
+    padding-left: 6px;
+    padding-RIGHT: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+td:last-child {
+    border-right: 0px;
 }
